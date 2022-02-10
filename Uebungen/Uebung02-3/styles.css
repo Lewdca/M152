@@ -1,0 +1,20 @@
+button {
+    display: block;
+    visibility: visible;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    padding: 2px 10px;
+}
+
+.abbrechen{
+    background-color: red !important;
+}
+.fortfahren{
+    background-color: green;
+}
+.zurück{
+    background-color: orange;
+}
+.starten{
+   background-color: blue;
+}
