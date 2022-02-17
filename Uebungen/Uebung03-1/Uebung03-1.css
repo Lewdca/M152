@@ -1,0 +1,21 @@
+div.person {
+  background-color: lightgray;
+  display: inline-block;
+  border-radius: 10px;
+  box-shadow: #777279 1px 1px;
+}
+div.person img {
+  border-radius: 50%;
+}
+div.person div.title {
+  text-align: center;
+  font-weight: bold;
+}
+div.person div.text {
+  text-align: center;
+}
+div.person button {
+  background-color: lawngreen;
+  border-radius: 5px;
+  width: 100%;
+}/*# sourceMappingURL=Uebung03-1.css.map */
