@@ -1,0 +1,10 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.container div {
+    height: 200px;
+    border: 1px solid black;
+    flex-basis: 200px;
+}

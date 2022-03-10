@@ -1,0 +1,15 @@
+.flex-container{
+    width: 100%;
+    display: flex;
+}
+.flex-container div{
+    flex: 1;
+    border: 1px solid black;
+    height: 100%;
+}
+#firstItem{
+    flex: 1;
+    flex-shrink: 0;
+    border: 1px solid black;
+    height: 100%;
+}
