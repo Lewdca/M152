@@ -1,0 +1,11 @@
+@font-face {
+  font-family: weird;
+  src: url(./Palette_Mosaic/PaletteMosaic-Regular.ttf);
+}
+@font-face {
+  font-family: japanisch;
+  src: url(./Noto_Sans_JP/NotoSansJP-Regular.otf);
+}
+.beispiel {
+  font-family: "weird", "Times New Roman", serif;
+}/*# sourceMappingURL=styles.css.map */

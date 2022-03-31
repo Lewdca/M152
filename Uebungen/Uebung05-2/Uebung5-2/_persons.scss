@@ -7,10 +7,10 @@
 
 .person {
         width: 100%;
-    @media screen and(min-width: 500px){
+    @media screen and(max-width: 500px){
         width: 50%;
     }
-    @media screen and(min-width: 900px) {
+    @media screen and(max-width: 900px) {
         width: 25%;
     }
     &__inner {
