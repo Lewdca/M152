@@ -5,17 +5,36 @@
 <style lang="scss">
 .grid-container {
   display: grid;
-  grid-template-columns: auto auto auto auto auto auto auto auto;
-  background-color: #2196F3;
+  grid-template-columns: auto;
   padding: 10px;
 }
 
-.grid-item {
-  background-color: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(0, 0, 0, 0.8);
-  padding: 20px;
-  font-size: 30px;
-  text-align: center;
+.flex-container {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: nowrap;
 }
 
+.flex-container > div {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.grid-item {
+  margin-bottom: 20px;
+  background-color: #d4d6d4;
+}
+
+body{
+  background-color: #e3e6e3;
+}
+
+@media only screen and (max-width: 680px) {
+  .flex-container{
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+}
+
+@import'~bootstrap/dist/css/bootstrap.css'
 </style>

@@ -1,18 +1,26 @@
 <template>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
   <div class="home">
-    <h1>Notenverwaltungstool</h1>
-
+    <h1 class="title">Notenverwaltungstool</h1>
     <div class="grid-container">
       <div v-for="(grades, subject) in subjects" class="grid-item">
-        {{ subject }} <br />
-        <div v-for="grade in grades.subjectArray">
-          {{ grade }}
-          <input type="button" v-on:click="deleteGrade(grade, subject)" value="Löschen"/>
+        <h2>{{ subject }} </h2><br />
+        <div class="flex-container">
+          <div v-for="grade in grades.subjectArray">
+            <h3>
+              {{ grade }}
+              <button class="btn btn-danger" v-on:click="deleteGrade(grade, subject)">
+                <i class="bi bi-trash-fill"></i>
+              </button>
+            </h3>
+          </div>
+          <div>
+            <h3>Avarage: {{ grades.avg }}</h3>
+          </div>
+          <div>
+            <input v-on:keyup.enter="addGrade($event, subject)" placeholder="Gib eine neue Note ein" /><br />
+          </div>
         </div>
-        <div>
-          Avarage: {{ grades.avg }}
-        </div>
-        <input v-on:keyup.enter="addGrade($event, subject)" placeholder="Gib eine neue Note ein" /><br />
       </div>
     </div>
   </div>
@@ -71,9 +79,9 @@ export default {
       subjects.value[subject].avg = subjectAvg.toFixed(2)
     }
 
-    function avgFunction(){
-      subjects.forEach(element =>{
-  
+    function avgFunction() {
+      subjects.forEach(element => {
+
       })
     }
 
@@ -89,13 +97,14 @@ export default {
       }
     }
 
-    function deleteGrade(grade, subject){
-     let arrayLength = subjects.value[subject].subjectArray.length;
-     for(var i = 0; i < arrayLength; i++){
-       if(subjects.value[subject].subjectArray[i] === grade){
-         subjects.value[subject].subjectArray.splice(i, 1);
-       }
-     }
+    function deleteGrade(grade, subject) {
+      let arrayLength = subjects.value[subject].subjectArray.length;
+      for (var i = 0; i < arrayLength; i++) {
+        if (subjects.value[subject].subjectArray[i] === grade) {
+          subjects.value[subject].subjectArray.splice(i, 1);
+          break;
+        }
+      }
     }
 
     return {
