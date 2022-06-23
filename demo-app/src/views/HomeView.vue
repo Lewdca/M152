@@ -1,7 +1,16 @@
 <template>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
   <div class="home">
-    <h1 class="title">Notenverwaltungstool</h1>
+    <div class="grid-top-container">
+      <div class="grid-item">
+        <h1>Notenverwaltungstool</h1>
+      </div>
+      <div class="grid-item">
+        <button class="btn btn-Dark">
+          <h1 class="bi bi-plus-circle-fill"></h1>
+        </button>
+      </div>
+    </div>
     <div class="grid-container">
       <div v-for="(grades, subject) in subjects" class="grid-item">
         <h2>{{ subject }} </h2><br />
@@ -22,6 +31,7 @@
           </div>
         </div>
       </div>
+      <h2>Durchschnitt: {{ average }}</h2>
     </div>
   </div>
 </template>
@@ -33,6 +43,7 @@ export default {
   name: 'HomeView',
   setup: () => {
     let subjectAvg
+    let average
 
     let subjects = ref({
       "GES": {
@@ -77,12 +88,16 @@ export default {
       })
       subjectAvg = temp / subjects.value[subject].subjectArray.length
       subjects.value[subject].avg = subjectAvg.toFixed(2)
+      avgFunction()
     }
 
     function avgFunction() {
+      let averageTemp = 0
+      let amountOfGrades = subjects.length
       subjects.forEach(element => {
-
+        averageTemp += element.avg
       })
+      average = averageTemp / amountOfGrades
     }
 
     function addGrade(e, subject) {
@@ -109,8 +124,9 @@ export default {
 
     return {
       subjects,
+      average,
       addGrade,
-      deleteGrade
+      deleteGrade,
     }
   }
 }

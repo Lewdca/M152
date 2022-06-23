@@ -9,6 +9,12 @@
   padding: 10px;
 }
 
+.grid-top-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  padding: 10px;
+}
+
 .flex-container {
   display: flex;
   justify-content: space-evenly;
@@ -28,6 +34,7 @@
 body{
   background-color: #e3e6e3;
 }
+
 
 @media only screen and (max-width: 680px) {
   .flex-container{
