@@ -50,7 +50,7 @@ body{
   background-color: white;
 }
 
-.form-container input[type=text], .form-container input[type=password] {
+.form-container input[type=text], .form-container {
   width: 100%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -58,7 +58,7 @@ body{
   background: #f1f1f1;
 }
 
-.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+.form-container input[type=text]:focus, .form-container {
   background-color: #ddd;
   outline: none;
 }
