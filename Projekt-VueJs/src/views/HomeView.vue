@@ -6,9 +6,20 @@
         <h1>Notenverwaltungstool</h1>
       </div>
       <div class="grid-item">
-        <button class="btn btn-Dark">
+        <button class="btn btn-Dark" v-on:click="openForm()">
           <h1 class="bi bi-plus-circle-fill"></h1>
         </button>
+      </div>
+    </div>
+    <div class="form-popup" id="myForm">
+      <div class="form-container">
+        <h1>Neues Fach</h1>
+
+        <label for="text"><b>Fachname</b></label>
+        <input type="text" placeholder="Fachname" name="fachName" v-model="newSubject">
+
+        <button type="submit" class="btn" v-on:click="addSubject($event)">Speichern</button>
+        <button type="button" class="btn cancel" v-on:click="closeForm()">Abbrechen</button>
       </div>
     </div>
     <div class="grid-container">
@@ -24,26 +35,26 @@
             </h3>
           </div>
           <div>
-            <h3>Avarage: {{ grades.avg }}</h3>
+            <h3>Durchschnitt: {{ grades.avg }}</h3>
           </div>
           <div>
             <input v-on:keyup.enter="addGrade($event, subject)" placeholder="Gib eine neue Note ein" /><br />
           </div>
         </div>
       </div>
-      <h2>Durchschnitt: {{ average }}</h2>
+      <h2>Gesammt Durchschnitt: {{ computedAverage }}</h2>
     </div>
   </div>
 </template>
 
 <script>
+import { computed } from '@vue/reactivity';
 import { ref } from 'vue'
 
 export default {
   name: 'HomeView',
   setup: () => {
-    let subjectAvg
-    let average
+    const newSubject = ref("");
 
     let subjects = ref({
       "GES": {
@@ -88,24 +99,37 @@ export default {
       })
       subjectAvg = temp / subjects.value[subject].subjectArray.length
       subjects.value[subject].avg = subjectAvg.toFixed(2)
-      avgFunction()
     }
 
-    function avgFunction() {
+    const computedAverage = computed(() => {
       let averageTemp = 0
-      let amountOfGrades = subjects.length
-      subjects.forEach(element => {
-        averageTemp += element.avg
-      })
-      average = averageTemp / amountOfGrades
+      let amountOfGrades = 0
+      for (let subject in subjects.value) {
+        for (let grade of subjects.value[subject].subjectArray) {
+          averageTemp += parseFloat(grade)
+          amountOfGrades++
+        }
+      }
+      return  Math.round((averageTemp / amountOfGrades)*2) / 2
+    })
+
+    function addSubject(e) {
+      subjects.value[newSubject.value] = {
+        subjectArray: [],
+        avg: 0
+      }
+      newSubject.value = "";
     }
 
     function addGrade(e, subject) {
       let tempGrade = e.target.value
-      if (tempGrade > 6)
-        console.log("Can't be higher than 6")
+      tempGrade = parseFloat(tempGrade).toFixed(2)
+      if (isNaN(tempGrade))
+        alert("Das ist keine Nummer.")
+      else if (tempGrade > 6)
+        alert("Die nummer muss zwischen 1 und 6 liegen.")
       else if (tempGrade < 1)
-        console.log("Can't be lower than 1")
+        alert("Die nummer muss zwischen 1 und 6 liegen.")
       else {
         subjects.value[subject].subjectArray.push(tempGrade)
         subjectAvgFunciton(subject)
@@ -122,11 +146,23 @@ export default {
       }
     }
 
+    function openForm() {
+      document.getElementById("myForm").style.display = "block";
+    }
+
+    function closeForm() {
+      document.getElementById("myForm").style.display = "none";
+    }
+
     return {
       subjects,
-      average,
       addGrade,
       deleteGrade,
+      openForm,
+      closeForm,
+      addSubject,
+      newSubject,
+      computedAverage
     }
   }
 }
